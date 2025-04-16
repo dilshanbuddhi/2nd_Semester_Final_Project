@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ella Rock - Comprehensive Destination Guide</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/searchSec.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+        .destination-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .sidebar {
+            background-color: #f3f4f6;
+            border-right: 1px solid #e5e7eb;
+            padding: 30px;
+        }
+        .detail-section {
+            padding: 30px;
+        }
+        .icon-box {
+            background-color: #e6f2ff;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        .icon-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .icon-box .icon {
+            color: #3b82f6;
+            margin-right: 15px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .gallery-image {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .weather-card {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .gallery-slider {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .gallery-slider:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .carousel-item img {
+            transition: transform 0.5s ease;
+        }
+        .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+
+
+             /* Applying the playful Baloo 2 font to key sections */
+         body {
+             font-family: 'Baloo 2', cursive;
+         }
+
+        .hero-section h1 {
+            color: #6c757d;
+            font-weight: lighter;
+            font-size: 4rem;
+        }
+
+        .hero-section span {
+            color: orange;
+        }
+
+        .hero-section img {
+            max-width: 100%;
+        }
+
+
+        .navbar-brand img {
+            width: 50px;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+        }
+
+        #text{
+            margin-top: -20px;
+        }
+
+        footer {
+            background-color: #f8f2eb;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Style for the navigation links */
+        .nav-link {
+            color: #888; /* Ash/gray color for non-active links */
+            transition: color 0.3s ease;
+        }
+
+        /* Style for the active navigation link */
+        .nav-link.active {
+            color: #FFA500; /* Orange color for the active link */
+        }
+
+        /* Hover effect for non-active links */
+        .nav-link:hover {
+            color: #555; /* Darker shade of gray for hover effect */
+        }
+
+        #cardSec h1{
+            margin-left: 100px;
+        }
+        .stats-section{
+            padding-top: 50px;
+        }
+        .stats-section .stat-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stats-section .stat-card h3 {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .stats-section .stat-card .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF8C00;
+        }
+
+        /* Add hover effect for a more interactive feel */
+        .stats-section .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Adjusting margins and padding for better spacing */
+        .stats-section .col-md-3 {
+            margin-bottom: 20px;
+        }
+
+
+        .join-btn {
+
+            padding: 2px 24px;
+            background-color: #874caf;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background-color: #45a049;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px 20px 30px 20px;
+            display: flex
+        ;
+            align-items: center;
+            transition: 0.3s ease-out;
+            backdrop-filter: blur(8px) brightness(1.2);
+            -webkit-backdrop-filter: blur(8px) brightness(1.2);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            color: #000000;
+            font-size: 20px;
+            mask-image: linear-gradient(black 70%, transparent);
+            z-index: 1000;
+
+            @media (min-width: 640px) {
+                padding: 16px 50px 30px 50px;
+            }
+        }
+        nav.is-hidden {
+            transform: translateY(-100%);
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+        .list {
+            list-style-type: none;
+            margin-left: auto;
+            display: none;
+            @media (min-width: 640px) {
+                display: flex;
+            }
+            li {
+                margin-left: 20px;
+            }
+        }
+        .search {
+            display: inline-block;
+            padding: 0;
+            font-size: 0;
+            background: none;
+            border: none;
+            margin-left: auto;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,.5));
+            @media (min-width: 640px) {
+                margin-left: 20px;
+            }
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 2rem;
+                height: 2rem;
+                background: center/1.3rem 1.3rem no-repeat url("data:image/svg+xml, %3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2015.17%2014.81%27%20width=%2715.17%27%20height=%2714.81%27%3E%3Cpath%20d=%27M6,.67A5.34,5.34,0,1,1,.67,6,5.33,5.33,0,0,1,6,.67ZM9.86,9.58l4.85,4.75Z%27%20fill=%27none%27%20stroke=%27%23fff%27%20stroke-width=%271.33%27%2F%3E%3C%2Fsvg%3E");
+            }
+        }
+        .menu {
+            display: inline-block;
+            padding: 0;
+            font-size: 0;
+            background: none;
+            border:  none;
+            margin-left: 20px;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,.5));
+            &::before {
+                content: url("data:image/svg+xml, %3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2024.8%2018.92%27%20width=%2724.8%27%20height=%2718.92%27%3E%3Cpath%20d=%27M23.8,9.46H1m22.8,8.46H1M23.8,1H1%27%20fill=%27none%27%20stroke=%27%23fff%27%20stroke-linecap=%27round%27%20stroke-width=%272%27%2F%3E%3C%2Fsvg%3E")
+            }
+            @media (min-width: 640px) {
+                display: none;
+            }
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+
+#hero {
+    padding-top: 5rem !important;
+}
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 20vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hotel-link {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .modern-button {
+            background: linear-gradient(135deg, #6e8efb, #4a6cf7);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
+        }
+
+        .modern-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 108, 247, 0.4);
+            background: linear-gradient(135deg, #5d7ef8, #3a5ce6);
+        }
+
+        .modern-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(74, 108, 247, 0.3);
+        }
+
+        .button-text {
+            margin-right: 4px;
+        }
+
+        .button-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .modern-button:hover .button-icon {
+            transform: translateX(3px);
+        }
+
+        /* Adding these styles ensures proper centering in most contexts */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="#">No mask</a>
+    <ul class="list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">User</a></li>
+        <li><a href="#">Place</a></li>
+        <li><a href="#">Hotel</a></li>
+        <li><i class="bi bi-person-plus" onclick="openModal()"></i>
+        </li>
+        <li> <a href="userProfile.html"><i class="fas fa-user-circle"></i></a>
+        </li>
+        <li><button class="join-btn" onclick="openRegModal()">Join</button></li>
+    </ul>
+    <button class="menu">Menu</button>
+</nav>
+
+
+<div class="container-fluid py-5" id="hero">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            <div class="destination-container row">
+                <!-- Sidebar -->
+                <div class="col-lg-3 sidebar">
+                    <h2 class="text-2xl font-bold mb-6" id="place-name">Ella Rock</h2>
+
+                    <div class="icon-box">
+                        <i data-feather="tag" class="icon" size="32"></i>
+                        <div>
+                            <h4 class="font-semibold">Category</h4>
+                            <p class="text-sm text-gray-600" id="category">Beach</p>
+                        </div>
+                    </div>
+                    <!-- Location Details -->
+
+                    <div class="icon-box">
+                        <i data-feather="map-pin" class="icon" size="32"></i>
+                        <div>
+                            <h4 class="font-semibold">Location</h4>
+                            <p class="text-sm text-gray-600" id="place-location">Central Highlands, Sri Lanka</p>
+                        </div>
+                    </div>
+
+                    <!-- Elevation Details -->
+                    <div class="icon-box">
+                        <i data-feather="navigation" class="icon" size="32"></i>
+                        <div>
+                            <h4 class="font-semibold">Travel Destination</h4>
+                            <p class="text-sm text-gray-600" id="destination">1,030 meters above sea level</p>
+                        </div>
+                    </div>
+
+                    <!-- Hike Details -->
+                    <div class="icon-box">
+                        <i data-feather="sun" class="icon" size="32"></i>
+                        <div>
+                            <h4 class="font-semibold">Hike Difficulty</h4>
+                            <p class="text-sm text-gray-600">Moderate | 3-4 Hours</p>
+                        </div>
+                    </div>
+
+                    <!-- Weather Card -->
+                    <div class="weather-card mt-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="font-semibold">Current Weather</h4>
+                                <p id="temperature" class="mb-2">Loading...</p>
+                            </div>
+                            <i data-feather="cloud-rain" size="48" id="weather-icon"></i>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small>Humidity</small>
+                                    <p id="humidity">Loading...</p>
+                                </div>
+                                <div>
+                                    <small>Wind</small>
+                                    <p id="wind-speed">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-card mt-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="font-semibold">Location</h4>
+                                <p id="location" class="mb-2">Loading...</p>
+                            </div>
+                            <i data-feather="wind" size="48" id="wind-icon"></i>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small>Sun Rice</small>
+                                    <p id="feel-like">Loading...</p> <!-- Corrected id to "wind-speed" -->
+                                </div>
+                                <div>
+                                    <small>Pressure</small>
+                                    <p id="pressure">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="col-lg-9">
+                    <!-- Image Gallery Slider -->
+                    <div class="mb-6 mt-4 pe-4">
+                        <h3 class="text-xl font-bold mb-4">Gallery</h3>
+                        <div id="ellaRockGallery" class="carousel slide carousel-fade gallery-slider" data-bs-ride="carousel">
+                            <!-- Indicators -->
+                            <div class="carousel-indicators" >
+                                <button type="button" data-bs-target="#ellaRockGallery" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#ellaRockGallery" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#ellaRockGallery" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+
+                            <!-- Carousel Items -->
+                            <div class="carousel-inner rounded-lg overflow-hidden" id="image-set" >
+
+                            </div>
+
+                            <!-- Navigation Buttons -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#ellaRockGallery" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#ellaRockGallery" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Destination Description -->
+                    <div class="mb-6 pe-4">
+                        <h3 class="text-xl font-bold mb-4">About <span id="about-name">Ella Rock</span></h3>
+                        <p class="text-gray-600" id="description">
+                            Ella Rock is a breathtaking hiking destination in the Central Highlands of Sri Lanka.
+                            Offering panoramic views of lush tea plantations, verdant forests, and distant mountain ranges,
+                            it's a paradise for nature lovers and adventure enthusiasts.
+                        </p>
+                    </div>
+
+                    <!-- Google Maps -->
+                    <div class="pe-4">
+                        <h3 class="text-xl font-bold mb-4">Location Map</h3>
+                        <div class="map-container">
+                            <div id="map">
+                                                      </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="button-container">
+    <a href="#" id="hotel" class="hotel-link">
+        <button id="hotel-discover" class="modern-button">
+            <span class="button-text">Discover Perfect Stay</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                <path d="m9 18 6-6-6-6"></path>
+            </svg>
+        </button>
+    </a>
+</div>
+<div class="search-section" id="search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="search-box">
+                    <h4 class="search-title">Find Your Next Adventure</h4>
+                    <div class="line-dec"></div>
+                    <p>Discover beautiful destinations, book comfortable hotels, and find local guides for an unforgettable travel experience.</p>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" class="form-control" id="destinations" placeholder="Where do you want to go?">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="categorys">
+                                <option value="">All Categories</option>
+                                <option value="beach">Beaches</option>
+                                <option value="mountain">Mountains</option>
+                                <option value="historical">Historical Sites</option>
+                                <option value="wildlife">Wildlife</option>
+                                <option value="adventure">Adventure</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dates">Travel Dates</label>
+                            <input type="text" class="form-control" id="dates" placeholder="Check-in — Check-out">
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Number of Guests</label>
+                            <input type="number" class="form-control" id="guests" min="1" value="2">
+                        </div>
+                        <button type="submit" class="btn primary-btn btn-block">Search Now</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h4>Explore by Category</h4>
+                        <div class="line-dec"></div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-umbrella-beach"></i>
+                            </div>
+                            <h6>Beaches</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h6>Mountains</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h6>Historical</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-hiking"></i>
+                            </div>
+                            <h6>Adventure</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4" id="places">
+                    <div class="col-12 mb-3">
+                        <h4>Popular Destinations</h4>
+                        <div class="line-dec"></div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="popular-place">
+                            <div class="place-img">
+                                <img src="img/5th-section.jpg" alt="Beach destination">
+                                <span class="place-tag">Beach</span>
+                            </div>
+                            <div class="place-info">
+                                <h5 class="place-title">Hikkaduwa Beach</h5>
+                                <p class="place-location"><i class="fas fa-map-marker-alt"></i> Southern Province</p>
+                                <div class="weather-info">
+                                    <i class="fas fa-sun"></i> 32°C Sunny
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="text-muted ml-1">(128)</span>
+                                    </div>
+                                    <a href="#" class="outline-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="popular-place">
+                            <div class="place-img">
+                                <img src="/api/placeholder/400/320" alt="Mountain destination">
+                                <span class="place-tag">Mountain</span>
+                            </div>
+                            <div class="place-info">
+                                <h5 class="place-title">Ella Rock</h5>
+                                <p class="place-location"><i class="fas fa-map-marker-alt"></i> Central Highlands</p>
+                                <div class="weather-info">
+                                    <i class="fas fa-cloud"></i> 24°C Partly Cloudy
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="text-muted ml-1">(95)</span>
+                                    </div>
+                                    <a href="hotelBook.html" class="outline-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="popular-place">
+                            <div class="place-img">
+                                <img src="/api/placeholder/400/320" alt="Historical destination">
+                                <span class="place-tag">Historical</span>
+                            </div>
+                            <div class="place-info">
+                                <h5 class="place-title">Sigiriya Rock Fortress</h5>
+                                <p class="place-location"><i class="fas fa-map-marker-alt"></i> Cultural Triangle</p>
+                                <div class="weather-info">
+                                    <i class="fas fa-sun"></i> 30°C Sunny
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span class="text-muted ml-1">(210)</span>
+                                    </div>
+                                    <a href="#" class="outline-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="popular-place">
+                            <div class="place-img">
+                                <img src="/api/placeholder/400/320" alt="Wildlife destination">
+                                <span class="place-tag">Wildlife</span>
+                            </div>
+                            <div class="place-info">
+                                <h5 class="place-title">Yala National Park</h5>
+                                <p class="place-location"><i class="fas fa-map-marker-alt"></i> Southern Province</p>
+                                <div class="weather-info">
+                                    <i class="fas fa-cloud-sun"></i> 29°C Mostly Sunny
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span class="text-muted ml-1">(156)</span>
+                                    </div>
+                                    <a href="#" class="outline-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://maps.gomaps.pro/maps/api/js?key=AlzaSyjAKgiJDIX4j0YE0Rllkwza2hVaALAZpvz&callback=initMap" async defer></script>
+<script src="JQ/jquery-3.7.1.min.js"></script>
+<script src="js/placeDetail.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Initialize Feather Icons -->
+<script>
+    feather.replace();
+</script>
+</body>
+</html>

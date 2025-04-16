@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload to Cloudinary</title>
+</head>
+<body>
+<!-- Form to upload images -->
+<form id="imageUploadForm">
+    <input name="imageFiles" type="file" class="form-control" id="placeimages" multiple accept="image/*">
+    <button type="submit" id="uploadBtn">Upload to Cloudinary</button>
+</form>
+
+<script src="JQ/jquery-3.7.1.min.js"></script>
+<script>
+    $('#uploadBtn').on('click', function(e) {
+        e.preventDefault();
+
+        // Get the image files
+        var imageFiles = $('#placeimages')[0].files; // Use 'files' to get the FileList object
+
+        if (imageFiles.length === 0) {
+            alert('Please select some images to upload.');
+            return;
+        }
+
+        var uploadedUrls = []; // Array to store the uploaded image URLs
+
+        // Loop through the files and upload each one
+        for (var i = 0; i < imageFiles.length; i++) {
+            var formData = new FormData();
+            formData.append('file', imageFiles[i]); // Append each file individually
+            formData.append('upload_preset', 'smallworld'); // Replace with your actual preset
+            formData.append('cloud_name', 'dtvizkvur'); // Replace with your Cloudinary cloud name
+
+            // Make the AJAX request to Cloudinary's API
+            $.ajax({
+                url: 'https://api.cloudinary.com/v1_1/dtvizkvur/image/upload', // Replace with your Cloudinary cloud name
+                type: 'POST',
+                data: formData,
+                processData: false, // Stop jQuery from processing the data
+                contentType: false, // Prevent jQuery from setting contentType
+                success: function(response) {
+                    // Store the uploaded URL
+                    uploadedUrls.push(response.url);
+                    console.log('Uploaded Successfully:', response.url);
+
+                    // If all files have been processed
+                    if (uploadedUrls.length === imageFiles.length) {
+                        console.log('All images uploaded:', uploadedUrls);
+                        alert('All images uploaded successfully!');
+                        // You can now use the uploadedUrls array as needed
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Upload Failed:', error);
+                    alert('There was an error uploading one of the images.');
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

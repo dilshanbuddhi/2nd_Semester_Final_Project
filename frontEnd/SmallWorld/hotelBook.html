@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <title>Hotel Booking | Tourism Platform</title>
+    <style>
+        /* Add these styles to your existing CSS */
+
+        /* Add these styles to your existing CSS */
+
+        .night-selector {
+            display: inline-flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-left: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .night-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            transition: all 0.2s ease;
+        }
+
+        .night-btn:hover:not([disabled]) {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .night-btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        #nights-count {
+            font-weight: bold;
+            margin: 0 5px;
+            color: var(--primary);
+        }
+
+        .selected-room {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .room-card .select-button {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .room-card.selected-room .select-button {
+            background-color: var(--secondary);
+        }
+
+        .booking-summary {
+            transition: all 0.3s ease;
+        }
+
+        .confirm-button[disabled] {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .room-card {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .room-card.selected-room {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .confirm-button[disabled] {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .room-card .select-button {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .room-card.selected-room .select-button {
+            background-color: var(--secondary);
+        }
+
+        .booking-summary {
+            transition: all 0.3s ease;
+        }
+        .hero-container {
+            margin-top: 36px;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-text {
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .search-container {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 20px;
+            align-items: end;
+        }
+
+        .search-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-input label {
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .search-input input,
+        .search-input select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+
+        .search-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-image {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: rotateX(5deg) rotateY(-5deg) scale(1.05);
+        }
+
+
+        body {
+            font-family: 'Baloo 2', cursive;
+        }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --gray: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /*
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            */
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            grid-column: span 2;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        @media (max-width: 768px) {
+            .search-button {
+                grid-column: span 1;
+            }
+        }
+
+        .search-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .hotel-results {
+            padding: 40px 0;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-sort {
+            display: flex;
+            gap: 15px;
+        }
+
+        .filter-button, .sort-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hotel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hotel-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hotel-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hotel-content {
+            padding: 15px;
+        }
+
+        .hotel-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .hotel-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .hotel-location {
+            color: var(--gray);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hotel-features {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating-number {
+            font-weight: bold;
+        }
+
+        .rating-count {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .book-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .book-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .load-more {
+            margin: 30px auto;
+            display: block;
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .load-more:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-content {
+            padding: 20px;
+        }
+
+        .hotel-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hotel-detail {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .detail-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+
+        .room-selection {
+            margin-top: 30px;
+        }
+
+        .room-card {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .room-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .room-image {
+            height: 90px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+        }
+
+        .room-details h4 {
+            margin-bottom: 5px;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .room-feature {
+            background-color: var(--light);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .room-price {
+            text-align: right;
+        }
+
+        .room-price .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .price-period {
+            display: block;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .select-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .select-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .booking-summary {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+
+        .booking-form {
+            margin-top: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .confirm-button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .confirm-button:hover {
+            background-color: #047857;
+        }
+
+
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 16px 20px 30px 20px;
+            display: flex
+        ;
+            align-items: center;
+            transition: 0.3s ease-out;
+            backdrop-filter: blur(8px) brightness(1.2);
+            -webkit-backdrop-filter: blur(8px) brightness(1.2);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            color: #000000;
+            font-size: 20px;
+            mask-image: linear-gradient(black 70%, transparent);
+            z-index: 1000;
+
+            @media (min-width: 640px) {
+                padding: 16px 50px 30px 50px;
+            }
+        }
+        nav.is-hidden {
+            transform: translateY(-100%);
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+        .list {
+            list-style-type: none;
+            margin-left: auto;
+            display: none;
+            @media (min-width: 640px) {
+                display: flex;
+            }
+            li {
+                margin-left: 20px;
+            }
+        }
+        .search {
+            display: inline-block;
+            padding: 0;
+            font-size: 0;
+            background: none;
+            border: none;
+            margin-left: auto;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,.5));
+            @media (min-width: 640px) {
+                margin-left: 20px;
+            }
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 2rem;
+                height: 2rem;
+                background: center/1.3rem 1.3rem no-repeat url("data:image/svg+xml, %3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2015.17%2014.81%27%20width=%2715.17%27%20height=%2714.81%27%3E%3Cpath%20d=%27M6,.67A5.34,5.34,0,1,1,.67,6,5.33,5.33,0,0,1,6,.67ZM9.86,9.58l4.85,4.75Z%27%20fill=%27none%27%20stroke=%27%23fff%27%20stroke-width=%271.33%27%2F%3E%3C%2Fsvg%3E");
+            }
+        }
+
+        .join-btn {
+
+            padding: 2px 24px;
+            background-color: #874caf;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background-color: #45a049;
+        }
+        .menu {
+            display: inline-block;
+            padding: 0;
+            font-size: 0;
+            background: none;
+            border:  none;
+            margin-left: 20px;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,.5));
+            &::before {
+                content: url("data:image/svg+xml, %3Csvg%20xmlns=%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox=%270%200%2024.8%2018.92%27%20width=%2724.8%27%20height=%2718.92%27%3E%3Cpath%20d=%27M23.8,9.46H1m22.8,8.46H1M23.8,1H1%27%20fill=%27none%27%20stroke=%27%23fff%27%20stroke-linecap=%27round%27%20stroke-width=%272%27%2F%3E%3C%2Fsvg%3E")
+            }
+            @media (min-width: 640px) {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <a href="#">No mask</a>
+        <ul class="list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">User</a></li>
+            <li><a href="#">Place</a></li>
+            <li><a href="#">Hotel</a></li>
+            <li><i class="bi bi-person-plus" onclick="openModal()"></i>
+            </li>
+            <li> <a href="userProfile.html"><i class="fas fa-user-circle"></i></a>
+            </li>
+            <li><button class="join-btn" onclick="openRegModal()">Join</button></li>
+        </ul>
+        <button class="menu">Menu</button>
+    </nav>
+</header>
+
+
+<div class="hero-container">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">Discover Your Perfect Stay</h1>
+            <p class="hero-subtitle">Luxury accommodations tailored to your travel dreams. Explore, book, and experience the world like never before.</p>
+
+        </div>
+
+        <div class="hero-image">
+            <img src="img/3rd-tab.jpg" alt="Luxury Hotel Room">
+        </div>
+    </div>
+</div>
+<!-- Search Section -->
+
+<!-- Results Section -->
+<section class="hotel-results">
+    <div class="container">
+        <div class="result-header">
+            <h2 id="hotel-city">Hotels in Bali (25 results)</h2>
+            <div class="filter-sort">
+                <button class="filter-button">Filters ↓</button>
+                <select class="sort-select">
+                    <option>Sort by: Recommended</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Guest Rating</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="hotel-grid" id="hotel-cards">
+            <!-- Hotel Card 1 -->
+
+        </div>
+
+        <button class="load-more">Load More Hotels</button>
+    </div>
+</section>
+
+<!-- Booking Modal -->
+<div class="modal-overlay" id="bookingModal" style="display: none;">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="card-test">Book Your Stay</h2>
+            <button class="close-button" onclick="closeBookingModal()">×</button>
+        </div>
+        <div class="modal-content">
+            <div class="hotel-detail">
+                <div class="detail-image" style="background-image: url('img/4th-big-item.jpg');"></div>
+                <div>
+                    <h2>Bali Paradise Resort</h2>
+                    <div class="hotel-location">📍 Kuta, Bali - 2.3 km from center</div>
+                    <div class="rating" style="margin-top: 10px;">
+                        <span class="rating-number">4.8</span>
+                        <span class="rating-count">(423 reviews)</span>
+                    </div>
+                    <p style="margin-top: 15px;" id="desc">
+                        Experience the perfect blend of luxury and comfort at our beachfront resort. Enjoy stunning views of the ocean, top-notch amenities, and exceptional service during your stay.
+                    </p>
+                    <div class="hotel-features" style="margin-top: 15px;">
+                        <div class="feature">🏊‍♂️ Pool</div>
+                        <div class="feature">🍽️ Restaurant</div>
+                        <div class="feature">🅿️ Parking</div>
+                        <div class="feature">🏖️ Beach Access</div>
+                        <div class="feature">💆‍♀️ Spa</div>
+                        <div class="feature">🚌 Airport Shuttle</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-selection" id="room-cards">
+
+            </div>
+
+            <div class="booking-summary">
+                <h3>Booking Summary</h3>
+                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                    <div>Deluxe Ocean View (3 nights)</div>
+                    <div>$495.00</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                    <div>Taxes and fees</div>
+                    <div>$49.50</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 5px; font-weight: bold;">
+                    <div>Total</div>
+                    <div>$544.50</div>
+                </div>
+
+                    <h4>Payment Method</h4>
+                    <div class="payment-methods">
+                        <div class="payment-method active">Credit Card</div>
+                        <div class="payment-method">PayPal</div>
+                        <div class="payment-method">Bank Transfer</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardName">Name on Card</label>
+                            <input type="text" id="cardName">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv">
+                        </div>
+                    </div>
+
+                    <button class="confirm-button" id="confirm-booking">Confirm Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="JQ/jquery-3.7.1.min.js"></script>
+<script src="js/hotelBook.js"></script>
+<script>
+
+</script>
+</body>
+</html>

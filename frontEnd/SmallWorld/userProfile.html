@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="css/register.css">
+
+    <style>
+        nav{
+            background: #959aa1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --background: #f9fafb;
+            --card-bg: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --border: #e5e7eb;
+            --radius: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 90px auto;
+            gap: 24px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .logo svg {
+            margin-right: 12px;
+        }
+
+        .sidebar h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            margin-bottom: 32px;
+        }
+
+        .nav-list li {
+            margin-bottom: 4px;
+        }
+
+        .nav-list li a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-list li a svg {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .nav-list li a:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-list li a.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .edit-btn {
+            padding: 8px 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .profile-info {
+            display: flex;
+            gap: 32px;
+        }
+
+        .profile-picture {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e0e7ff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border: 4px solid #e0e7ff;
+            position: relative;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar .camera-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .profile-picture h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 8px;
+            color: var(--text-primary);
+        }
+
+        .user-details {
+            flex-grow: 1;
+        }
+
+        .detail-section {
+            margin-bottom: 28px;
+        }
+
+        .detail-section h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-section h4 svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-item p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            flex-grow: 1;
+        }
+
+        .tag {
+            background-color: #e0e7ff;
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .add-link {
+            color: red;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 12px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .add-link svg {
+            margin-right: 6px;
+        }
+
+        .add-link:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        .connected-account {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #f9fafb;
+            margin-bottom: 8px;
+        }
+
+        .connected-account .icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 0 16px;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .profile-info {
+                flex-direction: column;
+            }
+
+            .profile-picture {
+                margin-bottom: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#">No mask</a>
+    <ul class="list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">User</a></li>
+        <li><a href="#">Place</a></li>
+        <li><a href="#">Hotel</a></li>
+        <li id="loginIcon"><i class="bi bi-person-plus" onclick="openModal()"></i>
+        </li>
+        <li id="profileIcon"> <a href="userProfile.html"><i class="fas fa-user-circle"></i></a>
+        </li>
+        <li><button class="join-btn" onclick="openRegModal()">Join</button></li>
+    </ul>
+    <button class="menu">Menu</button>
+</nav>
+
+
+<div class="container">
+
+    <main class="content">
+        <div class="profile-card">
+            <div class="card-header">
+                <h2>Profile Details</h2>
+                <button class="edit-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    Edit Profile
+                </button>
+            </div>
+
+            <div class="profile-info">
+                <div class="profile-picture">
+                    <div class="avatar">
+                        <img src="img/user-icon-on-transparent-background-free-png.webp" alt="User Avatar">
+                        <div class="camera-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Alex Johnson</h3>
+                </div>
+
+                <div class="user-details">
+                    <div class="detail-section">
+                        <h4>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Personal Information
+                        </h4>
+                        <div class="detail-item">
+                            <p>Email</p>
+                            <p id="email">alex.johnson@example.com</p>
+                        </div>
+                        <div class="detail-item">
+                            <p>Phone</p>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                        <div class="detail-item">
+                            <p>Location</p>
+                            <p id="country">San Francisco, CA</p>
+                        </div>
+                        <div class="detail-item">
+                            <p>Message</p>
+                            <p id="massage">ddd</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            Contact Preferences
+                        </h4>
+                        <div class="detail-item">
+                            <p>Email Notifications</p>
+                            <p>Enabled <span class="tag">Primary</span></p>
+                        </div>
+                        <div class="detail-item">
+                            <p>SMS Notifications</p>
+                            <p>Disabled</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+
+                        <a href="#" class="add-link">
+                            <!-- Logout SVG icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 viewBox="0 0 24 24">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                            LogOut
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="JQ/jquery-3.7.1.min.js"></script>
+<script src="js/userProfile.js"></script>
+
+</body>
+</html>
